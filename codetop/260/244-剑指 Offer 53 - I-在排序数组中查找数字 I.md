@@ -11,17 +11,40 @@
 见题面链接。
 
 ## 最佳解法思路
-- TODO
+- 思路1（推荐）：二分找边界  
+有序数组里统计 `target` 出现次数：  
+`count = lowerBound(target+1) - lowerBound(target)`，其中 `lowerBound(x)` 是第一个 `>= x` 的下标。
 
 ## Java 最佳实现
 
 ```java
-// TODO
+class Solution {
+    public int search(int[] nums, int target) {
+        return lowerBound(nums, target + 1) - lowerBound(nums, target);
+    }
+
+    private int lowerBound(int[] nums, int target) {
+        int l = 0, r = nums.length;
+        while (l < r) {
+            int mid = l + (r - l) / 2;
+            if (nums[mid] >= target) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
+        return l;
+    }
+}
 ```
 
 ## 复杂度分析
-- 时间：TODO
-- 空间：TODO
+- 时间：\(O(\log n)\)
+- 空间：\(O(1)\)
 
 ## 相关题目
-- TODO
+- 34 在排序数组中查找元素的第一个和最后一个位置
+- 704 二分查找
+
+## 总结（速记）
+- 计数题：**找左右边界**，用 `lowerBound` 最省事。  
