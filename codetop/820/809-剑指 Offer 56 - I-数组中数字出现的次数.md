@@ -11,17 +11,30 @@
 见题面链接。
 
 ## 最佳解法思路
-- TODO
+- 异或：整体异或得到 `a ^ b`，取 `lowbit` 把数组分两组分别异或，就能得到两个只出现一次的数。
 
 ## Java 最佳实现
 
 ```java
-// TODO
+class Solution {
+    public int[] singleNumbers(int[] nums) {
+        int xor = 0;
+        for (int x : nums) xor ^= x;
+        int lowbit = xor & -xor;
+
+        int a = 0, b = 0;
+        for (int x : nums) {
+            if ((x & lowbit) == 0) a ^= x;
+            else b ^= x;
+        }
+        return new int[]{a, b};
+    }
+}
 ```
 
 ## 复杂度分析
-- 时间：TODO
-- 空间：TODO
+- 时间：\(O(n)\)
+- 空间：\(O(1)\)
 
 ## 相关题目
-- TODO
+- 136 只出现一次的数字：缺一个数的异或

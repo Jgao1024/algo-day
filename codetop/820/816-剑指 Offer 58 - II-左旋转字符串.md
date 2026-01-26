@@ -11,17 +11,22 @@
 见题面链接。
 
 ## 最佳解法思路
-- TODO
+- 左旋 `n` 位：直接拼接 `s[n..] + s[0..n)`。
 
 ## Java 最佳实现
 
 ```java
-// TODO
+class Solution {
+    public String reverseLeftWords(String s, int n) {
+        n %= s.length();
+        return s.substring(n) + s.substring(0, n);
+    }
+}
 ```
 
 ## 复杂度分析
-- 时间：TODO
-- 空间：TODO
+- 时间：\(O(|s|)\)
+- 空间：\(O(|s|)\)
 
 ## 相关题目
-- TODO
+- 189 轮转数组：同类“旋转”问题
