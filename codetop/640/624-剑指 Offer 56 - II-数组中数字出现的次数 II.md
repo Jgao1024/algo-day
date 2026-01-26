@@ -11,17 +11,33 @@
 见题面链接。
 
 ## 最佳解法思路
-- TODO
+- 位统计（推荐）
+- 所有数字除了一个出现 1 次，其它都出现 3 次。对每一位统计 1 的个数，`count % 3` 就是答案该位。
 
 ## Java 最佳实现
 
 ```java
-// TODO
+class Solution {
+    public int singleNumber(int[] nums) {
+        int ans = 0;
+        for (int b = 0; b < 32; b++) {
+            int cnt = 0;
+            for (int x : nums) {
+                cnt += (x >>> b) & 1;
+            }
+            if (cnt % 3 != 0) {
+                ans |= (1 << b);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ## 复杂度分析
-- 时间：TODO
-- 空间：TODO
+- 时间：\(O(32n)\)
+- 空间：\(O(1)\)
 
 ## 相关题目
-- TODO
+- 136 只出现一次的数字
+- 137 只出现一次的数字 II
