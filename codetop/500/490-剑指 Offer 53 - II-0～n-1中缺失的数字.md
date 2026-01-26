@@ -11,17 +11,36 @@
 见题面链接。
 
 ## 最佳解法思路
-- TODO
+- 二分查找（推荐）  
+有序数组满足：正常情况下 `nums[i] == i`；一旦缺了某个数后，右侧会变成 `nums[i] > i`。  
+二分找第一个满足 `nums[mid] != mid` 的位置，答案就是该位置下标。
 
 ## Java 最佳实现
 
 ```java
-// TODO
+class Solution {
+    public int missingNumber(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == mid) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
+    }
+}
 ```
 
 ## 复杂度分析
-- 时间：TODO
-- 空间：TODO
+- 时间：\(O(\log n)\)
+- 空间：\(O(1)\)
 
 ## 相关题目
-- TODO
+- 278 第一个错误的版本（同类二分边界）
+
+## 总结（速记）
+- **找“第一个不满足 `nums[i]==i` 的下标”**。
